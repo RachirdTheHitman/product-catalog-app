@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@emotion/react';
+import { CartProvider } from './context/CartContext';
 import { GlobalStyles } from './styles/GlobalStyles';
 import { theme } from './styles/theme';
 import Layout from './components/Layout';
@@ -12,13 +13,15 @@ function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <BrowserRouter>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<ProductList />} />
-            <Route path="/product/:id" element={<ProductDetail />} />
-            <Route path="/cart" element={<ShoppingCart />} />
-          </Routes>
-        </Layout>
+        <CartProvider>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<ProductList />} />
+              <Route path="/product/:id" element={<ProductDetail />} />
+              <Route path="/cart" element={<ShoppingCart />} />
+            </Routes>
+          </Layout>
+        </CartProvider>
       </BrowserRouter>
     </ThemeProvider>
   );
